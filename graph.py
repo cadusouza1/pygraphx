@@ -2,6 +2,8 @@ from typing import Any, Callable, Generator
 
 import pygame
 
+MAX_NUM_OF_POINTS = 100_000
+
 
 class Function:
     def __init__(
@@ -64,6 +66,9 @@ class Graph:
     def _generate_points(
         self, start: float, end: float, step: float
     ) -> Generator[float, Any, None]:
+        max_step = (end - start) / MAX_NUM_OF_POINTS
+        step = max(max_step, step)
+
         while start <= end:
             yield start
             start += step
